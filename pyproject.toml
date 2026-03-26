@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zed-db"
+version = "0.1.0"
+description = "A fully-featured persistent relational database engine written in Python"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+authors = [{name = "Zed Team"}]
+keywords = ["database", "sql", "relational", "b-tree", "persistence"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Database",
+]
+dependencies = ["prompt_toolkit>=3.0.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0.0", "pytest-cov>=4.0.0", "mypy>=1.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/zed-base/zed"
+Repository = "https://github.com/zed-base/zed"
+
+[project.scripts]
+zed = "zed.repl:run_repl"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["zed*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.coverage.run]
+source = ["zed"]
+omit = ["zed/repl.py", "zed/__pycache__/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = ["pragma: no cover", "def __repr__", "if __name__"]
+precision = 1
